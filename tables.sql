@@ -35,7 +35,7 @@ create table countries_docs (
 create table topics (
     topic_id        id_d    not null,
     title           text    not null,
-    topic_name      text    not null
+    topic_name      text
 );
 
 create table topics_docs (
@@ -47,10 +47,10 @@ create table volumes (
     volume_id               id_d,
     title_series            text,
     title_subseries         text,
-    title_volunum           text,
+    title_volnum            text,
     title_vol               text,
     editors                 text,
-    publication_date        date,
+    publication_year        integer,
     publication_location    text,
     preface                 text,
     sources                 text
@@ -59,13 +59,12 @@ create table volumes (
 create table docs_frus (
     doc_id                id_d not null,
     chapt_title           text,
-    title_vol             text,
     volume_id             id_d,
     doc_source            text,
     authored_location     text,
     sent_from             text,
     sent_to               text,
     title_docview         text,
-    ssubject              text,
+    subject               text,
     body                  text  /* source from body */
 );

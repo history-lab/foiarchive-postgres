@@ -10,7 +10,7 @@ alter table countries add primary key (country_id);
 
 alter table countries_docs add primary key (country_id, doc_id);
 alter table countries_docs add foreign key (country_id) references countries;
-alter table countries_docs add foreign key (country_id) references docs;
+alter table countries_docs add foreign key (doc_id) references docs;
 
 alter table topics add primary key (topic_id);
 
