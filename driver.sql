@@ -11,5 +11,7 @@ set search_path to foiarchive, "$user", public;
 \i constraints.sql
 -- add indexes
 \i indexes.sql
+-- add full text search
+\i fts.sql
 -- add grants
 \i grants.sql
