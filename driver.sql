@@ -13,5 +13,7 @@ set search_path to foiarchive, "$user", public;
 \i indexes.sql
 -- add full text search
 \i fts.sql
+-- add views
+\i views.sql
 -- add grants
 \i grants.sql
