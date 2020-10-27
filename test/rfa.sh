@@ -11,3 +11,6 @@
 ./ac.sh "docs?classification=in.(secret,top%20secret),full_text=wfts.iraq%20or%20rumsfeld&select=doc_id,authored,classification"
 # geographic query without dates
 ./ac.sh "countries?country_name=eq.Belize&select=docs(doc_id,authored,classification,title)"
+# Clinton Emails
+./ac.sh "docs?corpus=eq.clinton&authored=gte.2012-07-08&authored=lt.2012-07-09"
+./ac.sh "countries?country_name=eq.Haiti&select=docs(doc_id,authored,classification,title)&docs.authored=gt.2012-10-01"

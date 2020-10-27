@@ -2,7 +2,7 @@ create table docs (
     doc_id          id_d            not null,
     corpus          corpus_t        not null,
     classification  classification_t,
-    authored        date,
+    authored        timestamp with time zone,
     title           text            not null,  /* sourced from title */
     body            text            not null   /* sourced from raw_body */
 );
@@ -68,3 +68,15 @@ create table docs_frus (
     subject               text,
     body                  text  /* source from body */
 );
+
+create table docs_clinton (
+    doc_id                id_d not null,
+    thread_id             int  not null,
+    message_num           text,
+    doc_batch             text,
+    author                text,
+    posted_date           date,
+    declass_date          date,
+    reason                text,
+    source_url            text,
+    original_url          text);

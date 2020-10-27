@@ -23,3 +23,6 @@ alter table volumes add primary key (volume_id);
 alter table docs_frus add primary key (doc_id);
 alter table docs_frus add foreign key (doc_id) references docs;
 alter table docs_frus add foreign key (volume_id) references volumes;
+
+alter table docs_clinton add primary key (doc_id);
+alter table docs_clinton add foreign key (doc_id) references docs;
