@@ -1,0 +1,16 @@
+LOAD DATABASE
+     FROM      mysql://<user>:<pswd>@history-lab.org/declassification_frus
+     INTO postgresql:///postgres
+
+  SET PostgreSQL PARAMETERS
+      maintenance_work_mem to '128MB',
+      work_mem to '12MB',
+      search_path to 'frus_migrate, public, "$user"'
+
+  SET MySQL PARAMETERS
+      net_read_timeout  = '120',
+      net_write_timeout = '120'
+
+      INCLUDING ONLY TABLE NAMES MATCHING
+          'docs', 'persons', 'person_doc', 'countries', 'country_doc',
+          'topics', 'topic_doc', 'volumes';
