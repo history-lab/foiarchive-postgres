@@ -80,3 +80,32 @@ create table docs_clinton (
     reason                text,
     source_url            text,
     original_url          text);
+
+create table cfpf_concepts (
+    cfpf_concept_id      id_d not null,
+    concept_name         text);
+
+create table cfpf_concepts_docs (
+    cfpf_concept_id      id_d not null,
+    doc_id               id_d not null);
+
+create table cfpf_offices (
+    cfpf_office_id        id_d not null,
+    office_code           text not null);
+
+create table cfpf_offices_docs (
+    cfpf_office_id        id_d not null,
+    doc_id                id_d not null);
+
+create table cfpf_tags (
+    cfpf_tag_id          id_d not null,
+    tag                  text,
+    title                text,
+    description          text,
+    tag_class            text,
+    category             text,
+    tag_action           text);
+
+create table cfpf_urgencies (
+    cfpf_urgency_id      id_d not null,
+    urgency_code         text);

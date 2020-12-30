@@ -26,3 +26,31 @@ alter table docs_frus add foreign key (volume_id) references volumes;
 
 alter table docs_clinton add primary key (doc_id);
 alter table docs_clinton add foreign key (doc_id) references docs;
+
+alter table cfpf_concepts add primary key (cfpf_concept_id);
+
+alter table cfpf_concepts_docs add primary key (cfpf_concept_id, doc_id);
+alter table cfpf_concepts_docs add foreign key (cfpf_concept_id)
+   references cfpf_concepts;
+alter table cfpf_concepts_docs add foreign key (doc_id) references docs;
+
+alter table cfpf_offices add primary key (cfpf_office_id);
+
+alter table cfpf_offices_docs add primary key (cfpf_office_id, doc_id);
+alter table cfpf_offices_docs add foreign key (cfpf_office_id)
+   references cfpf_offices;
+alter table cfpf_offices_docs add foreign key (doc_id) references docs;
+
+alter table cfpf_tags add primary key (cfpf_tag_id);
+
+alter table cfpf_tags_docs add primary key (cfpf_tag_id, doc_id);
+alter table cfpf_tags_docs add foreign key (cfpf_tag_id)
+   references cfpf_tags;
+alter table cfpf_tags_docs add foreign key (doc_id) references docs;
+
+alter table cfpf_urgencies add primary key (cfpf_urgency_id);
+
+alter table cfpf_urgencies_docs add primary key (cfpf_urgency_id, doc_id);
+alter table cfpf_urgencies_docs add foreign key (cfpf_urgency_id)
+   references cfpf_urgencies;
+alter table cfpf_urgencies_docs add foreign key (doc_id) references docs;
