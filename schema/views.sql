@@ -3,18 +3,24 @@ select corpus, count(doc_id) doc_cnt
    from docs
    group by corpus;
 
-create or replace view entities(entity_type, entity_name, corpus, ref_cnt) as
-select 'country', country_name, corpus, count(cd.doc_id)
-from countries c join countries_docs cd on cd.country_id = c.country_id
-                 join docs d on cd.doc_id = d.doc_id
-group by rollup(country_name, corpus)
+create or replace view entities(entity_type, entity_id, entity_name, corpus, ref_cnt) as
+select 'country', c.country_id, c.country_name, cdr.corpus, cdr.ref_cnt
+from countries c join
+     (select cd.country_id, d.corpus, count(cd.doc_id) ref_cnt
+      from countries_docs cd join docs d on cd.doc_id = d.doc_id
+      group by rollup(cd.country_id, d.corpus)) cdr
+     on c.country_id = cdr.country_id
 union all
-select 'person', full_name, corpus, count(pd.doc_id)
-from persons p join persons_docs pd on pd.person_id = p.person_id
-               join docs d on pd.doc_id = d.doc_id
-group by rollup(full_name, corpus)
+select 'person', p.person_id, p.full_name, pdr.corpus, pdr.ref_cnt
+from persons p join
+     (select pd.person_id, d.corpus, count(d.doc_id) ref_cnt
+      from persons_docs pd join docs d on pd.doc_id = d.doc_id
+      group by rollup(pd.person_id, d.corpus)) pdr
+     on p.person_id = pdr.person_id
 union all
-select 'topic', topic_name, corpus, count(td.doc_id)
-from topics t join topics_docs td on td.topic_id = t.topic_id
-              join docs d on td.doc_id = d.doc_id
-group by rollup(topic_name, corpus);
+select 'topic', t.topic_id, t.topic_name, tdr.corpus, tdr.ref_cnt
+from topics t join
+     (select td.topic_id, d.corpus, count(d.doc_id) ref_cnt
+      from  topics_docs td join docs d on td.doc_id = d.doc_id
+      group by rollup(td.topic_id, corpus)) tdr
+     on t.topic_id = tdr.topic_id;
