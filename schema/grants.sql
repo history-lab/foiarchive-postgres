@@ -11,3 +11,4 @@ grant select on foiarchive.docs_frus to web_anon;
 grant select on foiarchive.volumes to web_anon;
 grant select on foiarchive.corpora to web_anon;
 grant select on foiarchive.entities to web_anon;
+grant select on foiarchive.documents to web_anon;
