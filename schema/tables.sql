@@ -4,7 +4,8 @@ create table docs (
     classification  classification_t,
     authored        timestamp with time zone,
     title           text            not null,  /* sourced from title */
-    body            text            not null   /* sourced from raw_body */
+    body            text            not null,  /* sourced from raw_body */
+    source          text
 );
 
 create table persons (
