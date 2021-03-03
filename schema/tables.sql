@@ -82,6 +82,13 @@ create table docs_clinton (
     source_url            text,
     original_url          text);
 
+create table docs_cfpf (
+    doc_id                id_d not null,
+    to_field              text,
+    from_field            text,
+    frus_match            id_d
+    );
+
 create table cfpf_concepts (
     cfpf_concept_id      id_d not null,
     concept_name         text);

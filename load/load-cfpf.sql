@@ -10,6 +10,10 @@ select id, 'cfpf',
               coalesce(body,  'No Text Body Available for Document')
 from declassification_cables.docs;
 
+insert into docs_cfpf (doc_id, to_field, from_field, frus_match)
+select id, to_field, from_field, frus_match
+   from declassification_cables.docs;
+
 insert into persons(person_id, full_name, birth_year, death_year, description)
 select id, name, birth_year, death_year, description
 from declassification_cables.persons;

@@ -27,6 +27,9 @@ alter table docs_frus add foreign key (volume_id) references volumes;
 alter table docs_clinton add primary key (doc_id);
 alter table docs_clinton add foreign key (doc_id) references docs;
 
+alter table docs_cfpf add primary key (doc_id);
+alter table docs_cfpf add foreign key (doc_id) references docs;
+
 alter table cfpf_concepts add primary key (cfpf_concept_id);
 
 alter table cfpf_concepts_docs add primary key (cfpf_concept_id, doc_id);
