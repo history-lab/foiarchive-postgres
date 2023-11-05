@@ -1,7 +1,7 @@
 create or replace view declassification_cia.docs_view as
 select m.id doc_id, m.title, 
     lower(d.classification) classification,
-    m.pubdate authored,
+    m.pubdate authored, date_part('YEAR', m.pubdate) authored_year, 
     case when m.pages = '' then null::smallint
          else m.pages::smallint
     end pages, 
