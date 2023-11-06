@@ -11,5 +11,10 @@ insert into declassification_cia.classifications
     ('Unknown', 'F', 5),
     ('Unknown', 'K', 5),
     ('Unclassified', 'U', 6);
-
 # TODO add FK constraint
+create table declassification_cia.subcollections
+    (id             smallint generated always as identity primary key,
+     subcollection  text    not null unique);
+insert into declassification_cia.subcollections(subcollection)
+    select distinct m.collection
+        from declassification_cia.metadata m;
