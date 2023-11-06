@@ -18,3 +18,10 @@ create table declassification_cia.subcollections
 insert into declassification_cia.subcollections(subcollection)
     select distinct m.collection
         from declassification_cia.metadata m;
+
+create table declassification_cia.contenttypes
+    (id             smallint generated always as identity primary key,
+     contenttype    text     not null unique);
+insert into declassification_cia.contenttypes(contenttype)
+    select distinct m.contenttype
+        from declassification_cia.metadata m;
