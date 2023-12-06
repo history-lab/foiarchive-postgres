@@ -11,7 +11,7 @@ select m.id doc_id, m.title,
     case when m.sequenceno = '' then null::smallint  
          else sequenceno::smallint 
     end sequenceno,
-    d.body, length(d.body) body_length 
+    d.body, d.char_cnt::integer body_length, d.char_cnt, d.word_cnt 
     from declassification_cia.metadata m join 
          declassification_cia.docs d on m.id = d.id;
 
