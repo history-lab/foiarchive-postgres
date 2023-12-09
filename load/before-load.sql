@@ -3,7 +3,7 @@
 -- but should be generally applicable in the future
 
 -- think this is a one time operation
-
+ALTER TABLE foiarchive.docs ALTER COLUMN full_text DROP EXPRESSION;
 
 -- drop the indices on foiarchive for quicker load
 -- ABSOLUTELY CRITICAL these be recreated after the load 
