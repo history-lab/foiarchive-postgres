@@ -7,7 +7,9 @@ insert into foiarchive.classifications
     ('secret', 2),
     ('confidential', 3),
     ('limited official use', 4),
-    ('unclassified', 5);
+    ('unclassified', 5),
+    ('restricted', 3),
+    ('unknown', 6);
 
 create table foiarchive.corpora
     (corpus varchar(10) primary key);
