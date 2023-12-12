@@ -14,8 +14,8 @@ alter table foiarchive.docs add column doc_lang text;
 -- drop the indices on foiarchive for quicker load
 -- ABSOLUTELY CRITICAL these be recreated after the load 
 -- as is done in after-load.sql
-drop index docs$authored;
-drop index docs$corpus;
-drop index docs$full_text;
-drop index docs$classification;
+drop index docs_authored_idx;
+drop index docs_corpus_idx;
+drop index docs_full_text_idx;
+drop index docs_classification_idx;
 -- note: leave the primary key in place but rebuilding its index after the load 
