@@ -5,10 +5,10 @@
 -- this was a one time operation executed on 12/9/2023
 -- ALTER TABLE foiarchive.docs ALTER COLUMN full_text DROP EXPRESSION;
 -- this a one time operation execute on 12/12/2023
-alter table foiarchive.docs add column char_cnt integer;
-alter table foiarchive.docs add column word_cnt integer;
-alter table foiarchive.docs add column pg_cnt integer;
-alter table foiarchive.docs add column doc_lang text;
+-- alter table foiarchive.docs add column char_cnt integer;
+-- alter table foiarchive.docs add column word_cnt integer;
+-- alter table foiarchive.docs add column pg_cnt integer;
+-- alter table foiarchive.docs add column doc_lang text;
 
 
 -- drop the indices on foiarchive for quicker load
