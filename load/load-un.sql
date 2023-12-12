@@ -3,7 +3,7 @@ alter type foiarchive.corpus_t add value 'un';
 --
 alter type foiarchive.classification_t add value 'strictly confidential';
 alter type foiarchive.classification_t add value 'no security level';
-insert into foiarchive.classificatons (classification, sensitivity_level)
+insert into foiarchive.classifications (classification, sensitivity_level)
 values ('no security level', 6),
        ('strictly confidential', 2);
 --
