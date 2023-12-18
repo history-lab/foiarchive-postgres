@@ -8,3 +8,10 @@ select doc_id, 'nato', NULL classification, doc_date authored,
        end,
        body, pdf_url source
 from nato_archives.docs;
+
+update foiarchive.docs fd
+    set (char_cnt, word_cnt, pg_cnt, doc_lang) =
+        (select d.char_cnt, d.word_cnt, d.pg_cnt, d.lang 
+            from nato_archives.docs d
+            where d.doc_id = fd.doc_id::integer)
+    where corpus = 'nato';
