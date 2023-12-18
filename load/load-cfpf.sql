@@ -74,7 +74,19 @@ insert into cfpf_urgencies_docs(cfpf_urgency_id, doc_id)
 select urgency_id, doc_id
 from declassification_urgency_doc;
 
+-- 2023-12-17; 
+update foiarchive.docs 
+   set char_cnt = length(body),
+       word_cnt = (select count(*)
+                      from ts_parse('default', body) t
+                      where t.tokid = 1)
+where corpus = 'cfpf';
 
+update foiarchive.docs fd
+  set pg_cnt = (select page_count 
+                     from declassification_cables.docs c
+                     where c.id = fd.doc_id)
+  where corpus = 'cfpf';
 
 --insert into docs_cfpf (doc_id, chapt_title, volume_id, doc_source,
 --                       authored_location, sent_from, sent_to, title_docview,

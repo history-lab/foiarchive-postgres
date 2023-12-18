@@ -40,3 +40,10 @@ insert into volumes (volume_id, title_series, title_subseries, title_volnum,
 select id, title_series, title_subseries, title_volnum, title_vol,
        editors, substr(date, 1, 4)::integer, location, preface, sources
 from declassification_frus.volumes;
+
+update foiarchive.docs 
+   set char_cnt = length(body),
+       word_cnt = (select count(*)
+                      from ts_parse('default', body) t
+                      where t.tokid = 1)
+where corpus = 'frus';

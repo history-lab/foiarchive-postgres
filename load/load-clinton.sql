@@ -39,3 +39,10 @@ from declassification_clinton.country_doc;
 -- insert into topics_docs (topic_id, doc_id)
 -- select topic_id, doc_id
 -- from declassification_frus.topic_doc;
+
+update foiarchive.docs 
+   set char_cnt = length(body),
+       word_cnt = (select count(*)
+                      from ts_parse('default', body) t
+                      where t.tokid = 1)
+where corpus = 'clinton';

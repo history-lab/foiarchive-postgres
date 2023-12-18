@@ -23,3 +23,10 @@ from  declassification_kissinger.topics;
 insert into topics_docs (topic_id, doc_id)
 select concat('kiss', topic_id::text), doc_id
 from declassification_kissinger.topic_doc;
+
+update foiarchive.docs 
+   set char_cnt = length(body),
+       word_cnt = (select count(*)
+                      from ts_parse('default', body) t
+                      where t.tokid = 1)
+where corpus = 'kissinger';

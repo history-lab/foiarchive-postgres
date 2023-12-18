@@ -6,3 +6,16 @@ select id, 'pdb',
        end,
        date, subject, body, pdf
 from declassification_pdb.docs;
+
+update foiarchive.docs 
+   set char_cnt = length(body),
+       word_cnt = (select count(*)
+                      from ts_parse('default', body) t
+                      where t.tokid = 1)
+where corpus = 'pdb';
+
+update foiarchive.docs fd
+  set pg_cnt = (select page_count 
+                     from declassification_pdb.docs p
+                     where p.id = fd.doc_id)
+  where corpus = 'pdb';
