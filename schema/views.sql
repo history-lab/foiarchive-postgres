@@ -1,6 +1,6 @@
-create or replace view corpora as
+create materialized view foiarchive.corpora as
 select corpus, count(doc_id) doc_cnt
-   from docs
+   from foiarchive.docs
    group by corpus;
 
 create or replace view entities(entity_type, entity_id, entity_name, corpus, ref_cnt) as
