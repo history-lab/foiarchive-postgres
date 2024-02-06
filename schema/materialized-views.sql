@@ -1,8 +1,8 @@
-drop materialized view foiarchive.metrics
-create materialized view foiarchive.metrics as
+drop materialized view if exists foiarchive.totals;
+create materialized view foiarchive.totals as
 select count(doc_id) doc_cnt, sum(pg_cnt) pg_cnt, sum(word_cnt) word_cnt 
    from foiarchive.docs;
-grant select on foiarchive.metrics to web_anon;   
+grant select on foiarchive.totals to web_anon;   
 
 drop materialized view foiarchive.corpora;
 create materialized view foiarchive.corpora as
