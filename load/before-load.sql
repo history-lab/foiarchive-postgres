@@ -14,8 +14,22 @@
 -- drop the indices on foiarchive for quicker load
 -- ABSOLUTELY CRITICAL these be recreated after the load 
 -- as is done in after-load.sql
-drop index docs_authored_idx;
-drop index docs_corpus_idx;
-drop index docs_full_text_idx;
-drop index docs_classification_idx;
--- note: leave the primary key in place but rebuilding its index after the load 
+drop index foiarchive.docs_authored_idx;
+drop index foiarchive.docs_corpus_idx;
+drop index foiarchive.docs_full_text_idx;
+drop index foiarchive.docs_classification_idx;
+-- note: leave the primary key in place but rebuilding its index after the load is a good idea
+--    TABLE "cfpf_concepts_docs" CONSTRAINT "cfpf_concepts_docs_doc_id_fkey" FOREIGN KEY (doc_id) REFERENCES docs(doc_id)
+--    TABLE "cfpf_offices_docs" CONSTRAINT "cfpf_offices_docs_doc_id_fkey" FOREIGN KEY (doc_id) REFERENCES docs(doc_id)
+--    TABLE "cfpf_tags_docs" CONSTRAINT "cfpf_tags_docs_doc_id_fkey" FOREIGN KEY (doc_id) REFERENCES docs(doc_id)
+--    TABLE "countries_docs" CONSTRAINT "countries_docs_doc_id_fkey" FOREIGN KEY (doc_id) REFERENCES docs(doc_id)
+--    TABLE "docs_cfpf" CONSTRAINT "docs_cfpf_doc_id_fkey" FOREIGN KEY (doc_id) REFERENCES docs(doc_id)
+--    TABLE "docs_clinton" CONSTRAINT "docs_clinton_doc_id_fkey" FOREIGN KEY (doc_id) REFERENCES docs(doc_id)
+alter TABLE "cfpf_concepts_docs" drop CONSTRAINT if exists "cfpf_concepts_docs_doc_id_fkey"; 
+alter TABLE "cfpf_offices_docs" drop CONSTRAINT if exists "cfpf_offices_docs_doc_id_fkey";
+alter TABLE "cfpf_tags_docs" drop CONSTRAINT if exists "cfpf_tags_docs_doc_id_fkey";
+alter TABLE "countries_docs" drop CONSTRAINT if exists "countries_docs_doc_id_fkey";
+alter TABLE "docs_cfpf" drop CONSTRAINT if exists "docs_cfpf_doc_id_fkey";
+alter TABLE "docs_clinton" drop CONSTRAINT if exists "docs_clinton_doc_id_fkey";
+
+
