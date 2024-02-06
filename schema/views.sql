@@ -1,8 +1,3 @@
-create materialized view foiarchive.corpora as
-select corpus, count(doc_id) doc_cnt
-   from foiarchive.docs
-   group by corpus;
-
 create or replace view entities(entity_type, entity_id, entity_name, corpus, ref_cnt) as
 select 'country', c.country_id, c.country_name, cdr.corpus, cdr.ref_cnt
 from countries c join
