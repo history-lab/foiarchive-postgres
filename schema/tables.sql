@@ -33,17 +33,6 @@ create table countries_docs (
     doc_id          id_d    not null
 );
 
-create table topics (
-    topic_id        id_d    not null,
-    title           text    not null,
-    topic_name      text
-);
-
-create table topics_docs (
-    topic_id        id_d,
-    doc_id          id_d
-);
-
 create table volumes (
     volume_id               id_d,
     title_series            text,
