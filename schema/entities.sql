@@ -1,4 +1,4 @@
-create or replace view entities(entity_type, entity_id, entity_name, corpus, ref_cnt) as
+create or replace view foiarchive.entities(entity_type, entity_id, entity_name, corpus, ref_cnt) as
 select 'country', c.country_id, c.country_name, cdr.corpus, cdr.ref_cnt
 from countries c join
      (select cd.country_id, d.corpus, count(cd.doc_id) ref_cnt
@@ -19,3 +19,4 @@ from topics t join
       from  topics_docs td join docs d on td.doc_id = d.doc_id
       group by rollup(td.topic_id, corpus)) tdr
      on t.topic_id = tdr.topic_id;
+grant select on foiarchive.entities to web_anon;
