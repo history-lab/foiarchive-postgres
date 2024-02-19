@@ -22,3 +22,5 @@ select d.doc_id, corpus, classification, authored, title, cl.countries,
 from docs d left join countries_list cl on d.doc_id = cl.doc_id
             left join persons_list pl on d.doc_id = pl.doc_id
             left join topics_list tl on d.doc_id = tl.doc_id;
+grant select on foiarchive.documents to web_anon;
+
