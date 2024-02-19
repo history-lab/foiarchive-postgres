@@ -14,10 +14,11 @@ from foiarchive.persons p join
       group by rollup(pd.person_id, d.corpus)) pdr
      on p.person_id = pdr.person_id
 union all
-select 'topic', t.topic_id, t.topic_name, tdr.corpus, tdr.ref_cnt
+select 'topic', t.topic_id::id_d, t.name, tdr.corpus, tdr.ref_cnt
 from foiarchive.topics t join
      (select td.topic_id, d.corpus, count(d.doc_id) ref_cnt
-      from  foiarchive.topics_docs td join foiarchive.docs d on td.doc_id = d.doc_id
-      group by rollup(td.topic_id, corpus)) tdr
+      from  foiarchive.topic_docs td 
+          join foiarchive.docs d on td.doc_id = d.doc_id and td.corpus = d.corpus
+      group by rollup(td.topic_id, d.corpus)) tdr
      on t.topic_id = tdr.topic_id;
 grant select on foiarchive.entities to web_anon;
