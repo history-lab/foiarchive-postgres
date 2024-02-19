@@ -14,8 +14,8 @@ with countries_list (doc_id, countries) as
          group by doc_id),
      topics_list (doc_id, topics, topic_ids) as
         (select td.doc_id,
-            array_agg(t.topic_name order by t.topic_name),
-            array_agg(t.topic_id order by t.topic_name)
+            array_agg(t.name order by t.name),
+            array_agg(t.topic_id order by t.name)
          from foiarchive.topics t 
             natural join foiarchive.topic_docs td
          group by doc_id)
