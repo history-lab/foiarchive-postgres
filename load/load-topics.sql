@@ -23,3 +23,12 @@
 \set corpus briefing
 \set schema briefing
 \i load-topics-corpus.sql
+\set corpus cabinet
+\set schema declassification_cabinet
+-- \set tid id
+-- \set tdtabname topic_doc 
+-- \set tscore topic_score 
+\i load-topics-corpus.sql
+\set corpus cpdoc
+\set schema declassification_cpdoc
+\i load-topics-corpus.sql
