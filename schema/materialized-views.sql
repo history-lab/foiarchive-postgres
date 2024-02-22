@@ -6,10 +6,11 @@ grant select on foiarchive.totals to web_anon;
 
 drop materialized view if exists foiarchive.totals_decade;
 create materialized view foiarchive.totals_decade as
-select date_trunc('decade', authored) authored, 
+select to_char(date_trunc('decade', authored), 'YYYY') decade, 
        count(doc_id) doc_cnt, sum(pg_cnt) pg_cnt, sum(word_cnt) word_cnt 
    from foiarchive.docs
-   group by date_trunc('decade', authored);
+   group by decade
+   order by decade;
 grant select on foiarchive.totals_decade to web_anon; 
 comment on materialized view foiarchive.totals_decade is 
    'Totals docs, pages and words in the FOIArchive by decade';
