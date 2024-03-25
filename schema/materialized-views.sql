@@ -18,7 +18,8 @@ comment on materialized view foiarchive.totals_decade is
 
 drop materialized view foiarchive.corpora;
 create materialized view foiarchive.corpora as
-with doc_stats(corpus, begin_date, end_date, doc_cnt, pg_cnt, word_cnt) as (
+with doc_stats(corpus, begin_date, end_date, 
+               doc_cnt, pg_cnt, word_cnt) as (
    select corpus, min(authored)::date, max(authored)::date, 
           count(doc_id), sum(pg_cnt), sum(word_cnt) 
       from foiarchive.docs
@@ -27,6 +28,8 @@ topic_stats(corpus, topic_cnt) as (
    select corpus, count(topic_id) topic_cnt
       from foiarchive.topics
       group by corpus)
-select ds.corpus, begin_date, end_date, doc_cnt, pg_cnt, word_cnt, topic_cnt 
-   from doc_stats ds left join topic_stats ts on ds.corpus = ts.corpus;
+select ds.corpus, cm.title, begin_date, end_date, doc_cnt, pg_cnt, word_cnt, topic_cnt 
+   from doc_stats ds
+      join foiarchive.corpora_metadata cm on ds.corpus = cm.corpus 
+      left join topic_stats ts on ds.corpus = ts.corpus;
 grant select on foiarchive.corpora to web_anon;
