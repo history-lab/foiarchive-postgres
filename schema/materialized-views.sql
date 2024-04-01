@@ -49,3 +49,28 @@ select ds.corpus, cm.title, begin_date, end_date,
       join foiarchive.corpora_metadata cm on ds.corpus = cm.corpus 
       left join topic_stats ts on ds.corpus = ts.corpus;
 grant select on foiarchive.corpora to web_anon;
+
+drop materialized view if exists cnts_by_date;
+create materialized view cnts_by_date as
+select c.corpus::text, to_char(d.authored, c.agg_date_fmt) time_period, 
+       count(d.doc_id) doc_cnt, sum(d.pg_cnt) pg_cnt, sum(d.word_cnt) word_cnt 
+   from corpora c join docs d on c.corpus = d.corpus
+   where agg_date_type != 'decade'
+   group by c.corpus, to_char(d.authored, c.agg_date_fmt)
+union
+select c.corpus::text, to_char(date_trunc('decade', authored), 'YYYY') decade, 
+       count(d.doc_id) doc_cnt, sum(d.pg_cnt) pg_cnt, sum(d.word_cnt) word_cnt 
+   from corpora c join docs d on c.corpus = d.corpus
+   where agg_date_type = 'decade'
+   group by c.corpus, decade
+union
+select 'foiarchive', to_char(date_trunc('decade', authored), 'YYYY') decade, 
+       count(doc_id) doc_cnt, sum(pg_cnt) pg_cnt, sum(word_cnt) word_cnt 
+   from docs
+   group by decade
+order by 1, 2;
+grant select on foiarchive.cnts_by_date to web_anon; 
+comment on materialized view foiarchive.cnts_by_date is 
+   'Totals docs, pages and words in the FOIArchive and its corpora by date';
+
+
