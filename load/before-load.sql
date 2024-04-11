@@ -33,3 +33,6 @@ alter TABLE "docs_cfpf" drop CONSTRAINT if exists "docs_cfpf_doc_id_fkey";
 alter TABLE "docs_clinton" drop CONSTRAINT if exists "docs_clinton_doc_id_fkey";
 
 
+alter TABLE persons_docs drop CONSTRAINT if exists persons_docs_doc_id_fkey;
+alter TABLE topic_docs drop CONSTRAINT if exists topic_docs_doc_id_fkey;
+alter TABLE topic_docs drop CONSTRAINT if exists topic_docs_doc_id_fkey1;
